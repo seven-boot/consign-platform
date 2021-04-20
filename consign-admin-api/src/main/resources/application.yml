@@ -1,0 +1,49 @@
+# 项目相关配置
+consign:
+  # 名称
+  name: consign-platform
+  # 版本
+  version: v1
+  # 版权年份
+  copyrightYear: 2021
+  # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
+  profile: D:/textile/upload
+  # 获取ip地址开关
+  addressEnabled: false
+  # 验证码类型 math 数组计算 char 字符验证
+  captchaType: math
+
+server:
+  port: 8088
+
+# 日志配置
+#logging:
+#  level:
+#    com.seven.boot: debug
+#    org.springframework: warn
+
+# Spring 配置
+spring:
+  profiles:
+    active: dev
+
+# MyBatis配置
+mybatis:
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+
+# PageHelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+# token配置
+token:
+  # 令牌自定义标识
+  header: Authorization
+  # 令牌密钥
+  secret: abcdefghijklmnopqrstuvwxyz
+  # 令牌有效期（默认30分钟）
+  expireTime: 30
