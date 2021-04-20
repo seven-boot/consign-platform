@@ -51,7 +51,7 @@ public class SwaggerConfig {
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("标题：代销系统数据管理平台_接口文档")
+                .title("代销系统数据管理平台_接口文档")
                 .description("描述：用于管理代销系统中的各类数据，包括人员、代销点等...")
                 .contact(new Contact("seven", "https://keke76.top", "1042899106@qq.com"))
                 .version("版本号：" + consignConfig.getVersion())
