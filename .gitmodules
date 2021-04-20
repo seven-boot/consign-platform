@@ -1,3 +1,6 @@
 [submodule "consign-wx-mp"]
 	path = consign-wx-mp
 	url = https://github.com/seven-boot/consign-wx-mp.git
+[submodule "consign-admin-ui"]
+	path = consign-admin-ui
+	url = https://github.com/seven-boot/consign-admin-ui.git
