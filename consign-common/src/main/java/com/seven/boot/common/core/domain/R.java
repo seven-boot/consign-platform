@@ -1,5 +1,7 @@
 package com.seven.boot.common.core.domain;
 
+import org.springframework.http.HttpStatus;
+
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -34,6 +36,45 @@ public class R extends HashMap<String, Object> {
         if (Objects.nonNull(data)) {
             super.put(DATA_TAG, data);
         }
+    }
+
+    /**
+     * 返回成功消息
+     *
+     * @return 成功消息
+     */
+    public static R success() {
+        return R.success("操作成功");
+    }
+
+    /**
+     * 返回成功数据
+     *
+     * @return 成功消息
+     */
+    public static R success(Object data) {
+        return R.success("操作成功", data);
+    }
+
+    /**
+     * 返回成功消息
+     *
+     * @param msg 返回内容
+     * @return 成功消息
+     */
+    public static R success(String msg) {
+        return R.success(msg, null);
+    }
+
+    /**
+     * 返回成功消息
+     *
+     * @param msg 返回内容
+     * @param data 数据对象
+     * @return 成功消息
+     */
+    public static R success(String msg, Object data) {
+        return new R(HttpStatus.OK.value(), msg, data);
     }
 
     /**
