@@ -51,7 +51,11 @@
             <artifactId>oshi-core</artifactId>
         </dependency>
 
-        <!-- 系统模块-->
+        <!-- dao模块-->
+        <dependency>
+            <groupId>com.seven.boot</groupId>
+            <artifactId>consign-dao</artifactId>
+        </dependency>
 
     </dependencies>
 

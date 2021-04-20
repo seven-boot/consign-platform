@@ -15,6 +15,7 @@
     <description>代销系统数据管理平台</description>
 
     <properties>
+        <consign.version>1.0.0-SNAPSHOT</consign.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>16</java.version>
@@ -184,19 +185,35 @@
 
 
             <!-- 核心模块-->
-
+            <dependency>
+                <groupId>com.seven.boot</groupId>
+                <artifactId>consign-core</artifactId>
+                <version>${consign.version}</version>
+            </dependency>
 
             <!-- 系统模块-->
-
+            <dependency>
+                <groupId>com.seven.boot</groupId>
+                <artifactId>consign-dao</artifactId>
+                <version>${consign.version}</version>
+            </dependency>
 
             <!-- 通用工具-->
-
+            <dependency>
+                <groupId>com.seven.boot</groupId>
+                <artifactId>consign-common</artifactId>
+                <version>${consign.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
 
     <modules>
+        <module>consign-common</module>
+        <module>consign-dao</module>
         <module>consign-core</module>
+        <module>consign-admin-api</module>
+        <module>consign-wx-api</module>
     </modules>
 
     <build>
