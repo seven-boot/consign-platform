@@ -4,6 +4,7 @@ import com.google.code.kaptcha.Producer;
 import com.seven.boot.common.constant.Constants;
 import com.seven.boot.common.core.domain.R;
 import com.seven.boot.common.core.redis.RedisCache;
+import com.seven.boot.common.util.sign.Base64;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +17,6 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Base64;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -71,7 +71,7 @@ public class CaptchaController {
 
         R r = R.success();
         r.put("uuid", uuid);
-        r.put("img", Base64.getEncoder().encode(os.toByteArray()));
+        r.put("img", Base64.encode(os.toByteArray()));
         return r;
     }
 }
