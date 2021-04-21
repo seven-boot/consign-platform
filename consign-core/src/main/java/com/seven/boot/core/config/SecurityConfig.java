@@ -4,6 +4,7 @@ import com.seven.boot.core.security.filter.JwtAuthenticationTokenFilter;
 import com.seven.boot.core.security.handle.AuthenticationEntryPointImpl;
 import com.seven.boot.core.security.handle.LogoutSuccessHandlerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,7 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * 自定义用户认证逻辑
      */
-    @Resource
+    @Autowired
+    @Qualifier("userDetailServiceImpl")
     private UserDetailsService userDetailsService;
 
     /**
@@ -86,7 +88,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 过滤请求
                 .authorizeRequests()
                 // 对于登录login 验证码captchaImage 允许匿名访问
-                .antMatchers("/login", "/captchaImage").anonymous()
+                .antMatchers("/login", "/captcha-image").anonymous()
                 .antMatchers(
                         HttpMethod.GET,
                         "/*.html",
