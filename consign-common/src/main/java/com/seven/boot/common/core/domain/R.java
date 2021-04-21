@@ -80,6 +80,27 @@ public class R extends HashMap<String, Object> {
     /**
      * 返回错误消息
      *
+     * @param msg 返回内容
+     * @return 警告消息
+     */
+    public static R error(String msg) {
+        return R.error(msg, null);
+    }
+
+    /**
+     * 返回错误消息
+     *
+     * @param msg 返回内容
+     * @param data 数据对象
+     * @return 警告消息
+     */
+    public static R error(String msg, Object data) {
+        return new R(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg, data);
+    }
+
+    /**
+     * 返回错误消息
+     *
      * @param code 状态码
      * @param msg 返回内容
      * @return 警告消息
