@@ -44,4 +44,14 @@ public class RedisCache {
         ValueOperations<String, T> operations = redisTemplate.opsForValue();
         return operations.get(key);
     }
+
+    /**
+     * 删除单个对象
+     *
+     * @param key
+     * @return
+     */
+    public boolean deleteCache(final String key) {
+        return redisTemplate.delete(key);
+    }
 }
