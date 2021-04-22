@@ -29,6 +29,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private ISysUserService userService;
 
+    @Autowired
+    private SysPermissionService permissionService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 查询数据库判断用户是否合法
@@ -43,7 +46,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             log.info("登录用户：{} 已被停用.", username);
             throw new BaseException("对不起，您的账号：" + username + " 已停用");
         }
-        // TODO 查询权限
-        return new LoginUser(user, Sets.newHashSet());
+        // 查询权限
+        return new LoginUser(user, permissionService.getMenuPermission(user));
     }
 }
