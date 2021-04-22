@@ -1,11 +1,10 @@
 package com.seven.boot.admin.controller.system;
 
+import com.seven.boot.common.annotation.CurrentUser;
 import com.seven.boot.common.constant.Constants;
 import com.seven.boot.common.core.domain.R;
 import com.seven.boot.common.core.domain.entity.SysUser;
 import com.seven.boot.common.core.domain.model.LoginBody;
-import com.seven.boot.common.core.domain.model.LoginUser;
-import com.seven.boot.common.util.ServletUtils;
 import com.seven.boot.core.admin.service.SysLoginService;
 import com.seven.boot.core.admin.service.TokenService;
 import io.swagger.annotations.Api;
@@ -41,9 +40,7 @@ public class SysLoginController {
 
     @GetMapping("get-info")
     @ApiOperation("获取用户信息")
-    public R getInfo() {
-        LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
-        SysUser user = loginUser.getUser();
+    public R getInfo(@CurrentUser SysUser user) {
         // TODO 查询角色集合
 
         // TODO 查询权限集合

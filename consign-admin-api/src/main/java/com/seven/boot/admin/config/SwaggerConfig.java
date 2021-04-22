@@ -1,5 +1,6 @@
 package com.seven.boot.admin.config;
 
+import com.seven.boot.common.annotation.CurrentUser;
 import com.seven.boot.common.config.ConsignConfig;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,8 @@ public class SwaggerConfig {
                 .enable(enabled)
                 // 用来创建该API的基本信息，展示在文档的页面中（自定义展示的信息）
                 .apiInfo(apiInfo())
+                // 忽略显示的参数类型
+                .ignoredParameterTypes(CurrentUser.class)
                 // 设置哪些接口暴露给Swagger展示
                 .select()
                 // 扫描所有有注解的api，用这种方式更灵活
