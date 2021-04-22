@@ -19,8 +19,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.filter.CorsFilter;
 
-import javax.annotation.Resource;
-
 /**
  * Spring Security 配置
  *
@@ -33,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * 自定义用户认证逻辑
      */
     @Autowired
-    @Qualifier("userDetailServiceImpl")
+    @Qualifier("userDetailsServiceImpl")
     private UserDetailsService userDetailsService;
 
     /**
