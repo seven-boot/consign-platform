@@ -40,4 +40,13 @@
 		where u.user_id = #{userId} and m.menu_type in ('M', 'C') and m.status = 0  AND ro.status = 0
 		order by m.parent_id, m.order_num
     </select>
+
+    <select id="selectMenuPermsByUserId" resultType="java.lang.String">
+        select distinct m.perms
+		from sys_menu m
+			 left join sys_role_menu rm on m.menu_id = rm.menu_id
+			 left join sys_user_role ur on rm.role_id = ur.role_id
+			 left join sys_role r on r.role_id = ur.role_id
+		where m.status = '0' and r.status = '0' and ur.user_id = #{userId}
+    </select>
 </mapper>

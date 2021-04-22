@@ -25,4 +25,12 @@ public interface SysMenuMapper {
      * @return 菜单列表
      */
     List<SysMenu> selectMenuTreeByUserId(Long userId);
+
+    /**
+     * 根据用户id查询权限
+     *
+     * @param userId 用户id
+     * @return 权限列表
+     */
+    List<String> selectMenuPermsByUserId(Long userId);
 }

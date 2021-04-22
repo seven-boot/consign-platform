@@ -12,9 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 菜单业务处理层
@@ -70,6 +73,18 @@ public class SysMenuServiceImpl implements ISysMenuService {
             routers.add(router);
         }
         return routers;
+    }
+
+    @Override
+    public Set<String> selectMenuPermsByUserId(Long userId) {
+        List<String> perms = menuMapper.selectMenuPermsByUserId(userId);
+        Set<String> permsSet = new HashSet<>();
+        perms.forEach(p -> {
+            if (StringExtendUtils.isNotBlank(p)) {
+                permsSet.addAll(Arrays.asList(p.trim().split(",")));
+            }
+        });
+        return permsSet;
     }
 
     /**
