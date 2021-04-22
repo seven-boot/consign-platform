@@ -7,7 +7,7 @@ import com.seven.boot.common.core.domain.entity.SysMenu;
 import com.seven.boot.common.core.domain.entity.SysUser;
 import com.seven.boot.common.core.domain.model.LoginBody;
 import com.seven.boot.core.admin.service.SysLoginService;
-import com.seven.boot.core.admin.service.TokenService;
+import com.seven.boot.core.admin.service.SysPermissionService;
 import com.seven.boot.system.service.ISysMenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author QH
@@ -30,7 +31,10 @@ public class SysLoginController {
     private SysLoginService loginService;
 
     @Autowired
-    ISysMenuService menuService;
+    private SysPermissionService permissionService;
+
+    @Autowired
+    private ISysMenuService menuService;
 
     @PostMapping("login")
     @ApiOperation("登录")
@@ -45,13 +49,14 @@ public class SysLoginController {
     @GetMapping("get-info")
     @ApiOperation("获取用户信息")
     public R getInfo(@CurrentUser SysUser user) {
-        // TODO 查询角色集合
-
-        // TODO 查询权限集合
-
+        // 查询角色集合
+        Set<String> rolePerms = permissionService.getRolePermission(user);
+        // 查询权限集合
+        Set<String> menuPerms = permissionService.getMenuPermission(user);
         R r = R.success();
         r.put("user", user);
-
+        r.put("roles", rolePerms);
+        r.put("permissions", menuPerms);
         return r;
     }
 
