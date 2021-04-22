@@ -5,6 +5,7 @@ import com.seven.boot.common.constant.Constants;
 import com.seven.boot.common.core.domain.R;
 import com.seven.boot.common.core.redis.RedisCache;
 import com.seven.boot.common.util.sign.Base64;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,11 +22,10 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 验证码操作处理
- *
  * @author QH
  */
 @RestController
+@Api(tags = "验证码操作")
 public class CaptchaController {
 
     @Resource(name = "captchaProducer")
