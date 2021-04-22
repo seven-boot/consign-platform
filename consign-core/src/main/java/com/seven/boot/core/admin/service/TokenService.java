@@ -4,6 +4,7 @@ import com.seven.boot.common.constant.Constants;
 import com.seven.boot.common.core.domain.model.LoginUser;
 import com.seven.boot.common.core.redis.RedisCache;
 import com.seven.boot.common.util.ServletUtils;
+import com.seven.boot.common.util.StringExtendUtils;
 import com.seven.boot.common.util.ip.AddressUtils;
 import com.seven.boot.common.util.ip.IpUtils;
 import eu.bitwalker.useragentutils.UserAgent;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -48,6 +50,40 @@ public class TokenService {
     @Autowired
     private RedisCache redisCache;
 
+    /**
+     * 获取用户身份信息
+     *
+     * @return 用户信息
+     */
+    public LoginUser getLoginUser(HttpServletRequest request) {
+        // 获取请求携带的token
+        String token = getToken(request);
+        if (StringExtendUtils.isNotBlank(token)) {
+            Claims claims = parseToken(token);
+            // 解析对应的权限以及用户信息
+            String uuid = (String) claims.get(Constants.LOGIN_USER_KEY);
+            String userKey = getTokenKey(uuid);
+            return redisCache.getCacheObject(userKey);
+        }
+        return null;
+    }
+
+    /**
+     * 删除用户身份信息
+     */
+    public void delLoginUser(String token) {
+        if (StringExtendUtils.isNotBlank(token)) {
+            String tokenKey = getTokenKey(token);
+            redisCache.deleteCache(tokenKey);
+        }
+    }
+
+    /**
+     * 创建令牌
+     *
+     * @param loginUser 用户信息
+     * @return 令牌
+     */
     public String createToken(LoginUser loginUser) {
         String token = UUID.randomUUID().toString();
         loginUser.setToken(token);
@@ -99,6 +135,20 @@ public class TokenService {
                 .setSigningKey(secret)
                 .parseClaimsJws(token)
                 .getBody();
+    }
+
+    /**
+     * 获取请求token
+     *
+     * @param request
+     * @return token
+     */
+    private String getToken(HttpServletRequest request) {
+        String token = request.getHeader(this.header);
+        if (StringExtendUtils.isNotBlank(token) && token.startsWith(Constants.TOKEN_PREFIX)) {
+            token = token.replace(Constants.TOKEN_PREFIX, "");
+        }
+        return token;
     }
 
     private String getTokenKey(String uuid) {
