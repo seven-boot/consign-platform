@@ -4,7 +4,7 @@ import com.seven.boot.common.annotation.CurrentUser;
 import com.seven.boot.common.core.domain.entity.SysUser;
 import com.seven.boot.common.core.domain.model.LoginUser;
 import com.seven.boot.common.util.ServletUtils;
-import com.seven.boot.core.admin.service.TokenService;
+import com.seven.boot.admin.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;

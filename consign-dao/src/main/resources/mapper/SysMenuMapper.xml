@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.seven.boot.system.mapper.SysMenuMapper">
+<mapper namespace="com.seven.boot.dao.mapper.SysMenuMapper">
 
     <resultMap id="SysMenuResult" type="com.seven.boot.common.core.domain.entity.SysMenu">
         <id     property="menuId"         column="menu_id"        />

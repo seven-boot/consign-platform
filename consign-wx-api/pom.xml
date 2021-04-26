@@ -37,6 +37,10 @@
         </dependency>
 
         <!-- 核心模块-->
+        <dependency>
+            <groupId>com.seven.boot</groupId>
+            <artifactId>consign-core</artifactId>
+        </dependency>
 
         <!-- 定时任务-->
 
